@@ -1,0 +1,21 @@
+package company;
+
+public class Employee {
+    public String name;          // accessible everywhere
+    protected double salary;     // accessible in subclasses (even in other packages)
+    private int empId;           // accessible only inside this class
+    String department;           // default → accessible only within same package
+
+    public Employee(String name, double salary, int empId, String department) {
+        this.name = name;
+        this.salary = salary;
+        this.empId = empId;
+        this.department = department;
+    }
+
+    public void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Salary: " + salary);
+        System.out.println("Department: " + department);
+    }
+}
