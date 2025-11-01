@@ -1,0 +1,93 @@
+import java.util.*;
+
+class Account {
+    // Private data members (for security)
+    private String accountNumber;
+    private String accountHolderName;
+    private double balance;
+
+    // Constructor
+    public Account(String accountNumber, String accountHolderName, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = initialBalance;
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: Rs." + amount);
+        } else {
+            System.out.println("Invalid deposit amount!");
+        }
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: Rs." + amount);
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance!");
+        } else {
+            System.out.println("Invalid withdrawal amount!");
+        }
+    }
+
+    // Method to check balance
+    public void checkBalance() {
+        System.out.println("Current Balance: Rs." + balance);
+    }
+
+    // (Optional) Method to display account info securely
+    public void displayAccountDetails() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder: " + accountHolderName);
+    }
+}
+
+public class ATMSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Create a sample account
+        Account acc = new Account("123456789", "Jeni", 5000.0);
+
+        int choice;
+        do {
+            System.out.println("\n----- ATM MENU -----");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Account Details");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    acc.checkBalance();
+                    break;
+                case 2:
+                    System.out.print("Enter deposit amount: ");
+                    double dep = sc.nextDouble();
+                    acc.deposit(dep);
+                    break;
+                case 3:
+                    System.out.print("Enter withdrawal amount: ");
+                    double wd = sc.nextDouble();
+                    acc.withdraw(wd);
+                    break;
+                case 4:
+                    acc.displayAccountDetails();
+                    break;
+                case 5:
+                    System.out.println("Thank you for using the ATM!");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 5);
+    }
+}
