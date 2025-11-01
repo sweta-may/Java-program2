@@ -1,0 +1,21 @@
+package office;
+
+import company.Employee; // importing from another package
+
+public class Manager extends Employee {
+    public Manager(String name, double salary, int empId, String department) {
+        super(name, salary, empId, department);
+    }
+
+    public void showManagerDetails() {
+        System.out.println("Manager Name: " + name);      // public → accessible
+        System.out.println("Manager Salary: " + salary);   // protected → accessible in subclass
+        // System.out.println(empId);                      // private → NOT accessible
+        // System.out.println(department);                 // default → NOT accessible outside package
+    }
+
+    public static void main(String[] args) {
+        Manager m = new Manager("John", 75000, 101, "HR");
+        m.showManagerDetails();
+    }
+}
