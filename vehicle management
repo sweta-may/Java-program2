@@ -1,0 +1,46 @@
+class Vehicle {
+    String brand;
+    int speed;
+
+    void start() {
+        System.out.println("Vehicle started.");
+    }
+
+    void stop() {
+        System.out.println("Vehicle stopped.");
+    }
+}
+
+class Car extends Vehicle {
+    int seats;
+
+    void displayCarInfo() {
+        System.out.println("Car brand: " + brand + ", Speed: " + speed + " km/h, Seats: " + seats);
+    }
+}
+
+class Bike extends Vehicle {
+    boolean hasHelmet;
+
+    void displayBikeInfo() {
+        System.out.println("Bike brand: " + brand + ", Speed: " + speed + " km/h, Helmet: " + hasHelmet);
+    }
+}
+
+public class VehicleDemo {
+    public static void main(String[] args) {
+        Car c = new Car();
+        c.brand = "Toyota";
+        c.speed = 120;
+        c.seats = 4;
+        c.start();
+        c.displayCarInfo();
+
+        Bike b = new Bike();
+        b.brand = "Yamaha";
+        b.speed = 90;
+        b.hasHelmet = true;
+        b.displayBikeInfo();
+        b.stop();
+    }
+}
