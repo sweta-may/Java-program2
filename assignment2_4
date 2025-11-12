@@ -1,0 +1,17 @@
+import java.io.*;
+
+class InvalidBookingException extends Exception{
+    public InvalidBookingException(String message){
+        super(message);
+    }
+}
+public class BookingDemo{
+    public static void main(String[] args){
+        try{
+            Booking booking = new Booking("John Doe", "2024-12-25", 2);
+            System.out.println("Booking successful for " + booking.getName());
+        }catch (InvalidBookingException e){
+            System.out.println("Booking Error: " + e.getMessage());
+        }
+    }   
+}
