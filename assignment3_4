@@ -1,0 +1,49 @@
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class TextEditorUI extends Application {
+    @Override
+    public void start(Stage stage) {
+        MenuBar menuBar = new MenuBar();
+
+        Menu fileMenu = new Menu("File");
+        MenuItem newItem = new MenuItem("New");
+        MenuItem openItem = new MenuItem("Open");
+        MenuItem saveItem = new MenuItem("Save");
+        MenuItem exitItem = new MenuItem("Exit");
+        fileMenu.getItems().addAll(newItem, openItem, saveItem, new SeparatorMenuItem(), exitItem);
+
+        Menu editMenu = new Menu("Edit");
+        editMenu.getItems().addAll(new MenuItem("Cut"), new MenuItem("Copy"), new MenuItem("Paste"));
+
+        Menu helpMenu = new Menu("Help");
+        helpMenu.getItems().addAll(new MenuItem("About"));
+
+        menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
+
+        TextArea editor = new TextArea();
+        editor.setWrapText(true);
+
+        // Exit action
+        exitItem.setOnAction(e -> {
+            Platform.exit();
+        });
+
+        BorderPane root = new BorderPane();
+        root.setTop(menuBar);
+        root.setCenter(editor);
+
+        Scene scene = new Scene(root, 700, 500);
+        stage.setTitle("Simple Text Editor UI");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
