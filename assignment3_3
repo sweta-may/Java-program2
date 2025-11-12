@@ -1,0 +1,82 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+public class StudentForm extends Application {
+    @Override
+    public void start(Stage stage) {
+        Label nameLabel = new Label("Name:");
+        TextField nameField = new TextField();
+
+        Label rollLabel = new Label("Roll No:");
+        TextField rollField = new TextField();
+
+        // Gender radio buttons
+        ToggleGroup genderGroup = new ToggleGroup();
+        RadioButton rbMale = new RadioButton("Male");
+        rbMale.setToggleGroup(genderGroup);
+        RadioButton rbFemale = new RadioButton("Female");
+        rbFemale.setToggleGroup(genderGroup);
+        RadioButton rbOther = new RadioButton("Other");
+        rbOther.setToggleGroup(genderGroup);
+        HBox genderBox = new HBox(10, rbMale, rbFemale, rbOther);
+
+        // Department combo box
+        Label deptLabel = new Label("Department:");
+        ComboBox<String> deptCombo = new ComboBox<>();
+        deptCombo.getItems().addAll("Information Technology", "Computer Science", "Electronics", "Mechanical");
+        deptCombo.setValue("Information Technology");
+
+        // Submit button and result area
+        Button submit = new Button("Submit");
+        TextArea resultArea = new TextArea();
+        resultArea.setEditable(false);
+        resultArea.setPrefRowCount(6);
+
+        submit.setOnAction(e -> {
+            String name = nameField.getText().trim();
+            String roll = rollField.getText().trim();
+            Toggle selectedGender = genderGroup.getSelectedToggle();
+            String gender = selectedGender == null ? "Not selected" : ((RadioButton) selectedGender).getText();
+            String dept = deptCombo.getValue();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Student Information:\n");
+            sb.append("Name: ").append(name.isEmpty() ? "N/A" : name).append("\n");
+            sb.append("Roll No: ").append(roll.isEmpty() ? "N/A" : roll).append("\n");
+            sb.append("Gender: ").append(gender).append("\n");
+            sb.append("Department: ").append(dept).append("\n");
+
+            resultArea.setText(sb.toString());
+        });
+
+        GridPane form = new GridPane();
+        form.setHgap(10);
+        form.setVgap(10);
+        form.setPadding(new Insets(10));
+        form.add(nameLabel, 0, 0);
+        form.add(nameField, 1, 0);
+        form.add(rollLabel, 0, 1);
+        form.add(rollField, 1, 1);
+        form.add(new Label("Gender:"), 0, 2);
+        form.add(genderBox, 1, 2);
+        form.add(deptLabel, 0, 3);
+        form.add(deptCombo, 1, 3);
+        form.add(submit, 1, 4);
+
+        VBox root = new VBox(10, form, resultArea);
+        root.setPadding(new Insets(12));
+
+        Scene scene = new Scene(root, 450, 320);
+        stage.setTitle("Student Information Form");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
