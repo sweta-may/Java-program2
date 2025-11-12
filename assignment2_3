@@ -1,0 +1,20 @@
+import java.io.*;
+
+class InvalidMarksException extends Exception{
+    public InvalidMarksException(String message){
+        super(message);
+    }
+}
+public class customException{
+    public static void main(String[] args){
+        try{
+            int marks = 105;
+            if (marks>100){
+                throw new InvalidMarksException("Marks cannot exceed 100");
+            System.out.println("Valid marks: " + marks);
+            }catch (InvalidMarksException e){
+                System.out.println("Error :" + e.getMessage());
+            }
+        }
+    }
+}
